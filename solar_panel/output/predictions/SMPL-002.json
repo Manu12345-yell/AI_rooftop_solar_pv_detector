@@ -1,0 +1,17 @@
+{
+  "sample_id": "SMPL-002",
+  "image_path": "output\\images\\SMPL-002.jpg",
+  "detections": [
+    {
+      "class": "solar_panel",
+      "confidence": 0.7861094709843318,
+      "bbox": [
+        100,
+        100,
+        300,
+        300
+      ],
+      "mask_area_pixels": 4450
+    }
+  ]
+}

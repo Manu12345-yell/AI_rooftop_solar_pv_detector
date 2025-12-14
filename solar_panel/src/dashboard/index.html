@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolaVision AI | Rooftop PV Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <i class="fa-solid fa-solar-panel brand-icon"></i>
+                <h1>SolaVision<span class="accent">AI</span></h1>
+            </div>
+
+            <div class="stats-mini">
+                <div class="stat-item">
+                    <span class="label">Total Processed</span>
+                    <span class="value" id="total-processed">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">PV Found</span>
+                    <span class="value highlight" id="pv-found-count">0</span>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search Sample ID...">
+            </div>
+
+            <div class="sample-list" id="sample-list">
+                <!-- Sample items will be injected here -->
+                <div class="loading-spinner"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-bar glass-panel">
+                <div class="breadcrumbs">
+                    <span>Dashboard</span> <i class="fa-solid fa-chevron-right"></i> <span
+                        id="current-view">Overview</span>
+                </div>
+                <div class="user-profile">
+                    <div class="status-indicator online"></div>
+                    <span>System Active</span>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-grid">
+
+                <!-- Main Visualization (Map/Image) -->
+                <section class="viz-panel glass-panel">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-map-location-dot"></i> Aerial & PCB Analysis</h2>
+                        <div class="actions">
+                            <button class="btn-icon active" id="btn-view-image" title="Detection Overlay"
+                                onclick="switchView('image')"><i class="fa-regular fa-image"></i></button>
+                            <button class="btn-icon" id="btn-view-map" title="Google Map" onclick="switchView('map')"><i
+                                    class="fa-solid fa-map"></i></button>
+                        </div>
+                    </div>
+                    <div class="viz-display" id="viz-display">
+                        <div id="image-view" class="view-container">
+                            <div class="placeholder-state">
+                                <i class="fa-solid fa-satellite-dish"></i>
+                                <p>Select a sample from the sidebar to view details</p>
+                            </div>
+                        </div>
+                        <div id="map-view" class="view-container" style="display:none; width:100%; height:100%;"></div>
+                    </div>
+                </section>
+
+                <!-- Details Panel -->
+                <section class="details-panel glass-panel">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-circle-info"></i> Detection Metrics</h2>
+                        <span class="badge" id="qc-badge">WAITING</span>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <i class="fa-solid fa-vector-square"></i>
+                            <div class="metric-info">
+                                <span class="label">Total Roof Area</span>
+                                <span class="value" id="roof-area">--</span>
+                                <span class="unit">sq. ft</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <i class="fa-solid fa-solar-panel"></i>
+                            <div class="metric-info">
+                                <span class="label">PV Area Est.</span>
+                                <span class="value" id="pv-area">--</span>
+                                <span class="unit">sq. m</span>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <i class="fa-solid fa-percent"></i>
+                            <div class="metric-info">
+                                <span class="label">Confidence</span>
+                                <span class="value" id="confidence-score">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <h3>Location Data</h3>
+                        <div class="data-row">
+                            <span>Latitude</span>
+                            <span id="lat-val" class="mono">--</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Longitude</span>
+                            <span id="lon-val" class="mono">--</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Address</span>
+                            <span id="address-val">--</span>
+                        </div>
+                    </div>
+
+                    <div class="action-area">
+                        <button class="btn-primary" id="generate-report-btn">
+                            <i class="fa-solid fa-file-pdf"></i> Generate PDF
+                        </button>
+                        <button class="btn-secondary" id="flag-review-btn">
+                            <i class="fa-solid fa-flag"></i> Flag for Review
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

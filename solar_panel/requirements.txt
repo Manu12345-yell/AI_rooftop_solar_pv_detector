@@ -1,0 +1,18 @@
+# Core
+numpy>=1.24.0
+pandas>=2.0.0
+requests>=2.31.0
+tqdm>=4.65.0
+
+# Computer Vision & DL
+opencv-python>=4.8.0
+pillow>=10.0.0
+ultralytics>=8.0.0  # For YOLOv8
+torch>=2.0.0        # Pytorch (usually comes with ultralytics but good to be explicit)
+
+# GIS & Geometry
+shapely>=2.0.0
+geopy>=2.4.0
+
+# IO
+openpyxl>=3.1.0     # For Excel reading

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "SMPL-001",
+    "status": "QC_PASS",
+    "qc_reason": "Valid detection",
+    "pv_area_sqm": 84.89,
+    "pv_area_sqft": 913.75,
+    "confidence": 0.89,
+    "is_large_site": false,
+    "detections_count": 1,
+    "image_path": "output\\images\\SMPL-001.jpg"
+  },
+  {
+    "id": "SMPL-002",
+    "status": "QC_PASS",
+    "qc_reason": "Valid detection",
+    "pv_area_sqm": 76.55,
+    "pv_area_sqft": 823.94,
+    "confidence": 0.79,
+    "is_large_site": false,
+    "detections_count": 1,
+    "image_path": "output\\images\\SMPL-002.jpg"
+  },
+  {
+    "id": "SMPL-003",
+    "status": "QC_PASS",
+    "qc_reason": "Valid detection",
+    "pv_area_sqm": 50.74,
+    "pv_area_sqft": 546.2,
+    "confidence": 0.94,
+    "is_large_site": false,
+    "detections_count": 1,
+    "image_path": "output\\images\\SMPL-003.jpg"
+  }
+]
